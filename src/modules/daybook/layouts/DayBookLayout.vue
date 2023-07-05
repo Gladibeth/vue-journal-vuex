@@ -6,7 +6,7 @@
       <div class="col-3">
         <EntryList/>
       </div>
-      <div class="co">
+      <div class="col">
         <router-view/>
       </div>
     </div>
