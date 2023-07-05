@@ -2,12 +2,12 @@
   <div class="entry-list-container">
     <div class="px-2 py-2">
       <input type="text" class="form-control"
-      placeholder="Buscar entrada">
+      placeholder="Buscar entrada" v-model="term">
     </div>
     <div class="entry-scrollarea">
       <Entry
-      v-for="item in 100" :key="item"
-      >Entry</Entry>
+      v-for="entry in entriesByTerm" :key="entry.id" :info="entry"
+      ></Entry>
     </div>
   </div>
   
@@ -15,11 +15,25 @@
 
 <script>
 import { defineAsyncComponent } from 'vue'
+import { mapGetters } from 'vuex'
   export default{
     name: 'EntryListCompoent',
     components:{
       Entry: defineAsyncComponent(() => import('./Entry'))
-    }
+    },
+    computed: {
+      ...mapGetters('journal', ['getEntryByTerm']),
+      entriesByTerm(){
+        return this.getEntryByTerm(this.term)
+      }
+    },
+    data(){
+      return{
+        term: ''
+      }
+    },
+
+    
   }
 </script>
 

@@ -6,14 +6,20 @@
       <span class="mx-2 fw-light">2021, jueves</span>
     </div>
     <div class="entry-description">
-      Lorem ipsum dolor, sit amet consectetur adipisicing elit. Commodi assumenda hic rem veritatis magni laboriosam vel officia amet, veniam excepturi labore expedita fugiat cum vero officiis? Doloribus ullam nisi rem!
+       {{ info.text }}
     </div>
   </div>
 </template>
 
 <script>
    export default{
-    name: 'EntryComponents',
+    name: 'EntryComponent',
+    props: {
+      info: {
+        type: Object,
+        required: true,
+      }
+    }
    }
 </script>
 
