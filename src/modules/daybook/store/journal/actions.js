@@ -18,8 +18,13 @@ export const loadingEntries = async ( { commit } ) => {
   commit('setEntries', entries)
 } 
 
-export const updateEntry = async ( /*{ commit }*/ ) => {
+export const updateEntry = async ( { commit }, entry ) => {
+  const { date, picture,text } = entry
+  const dataSave = { date, picture,text}
 
+  await journaApi.put(`/entries/${entry.id}.json`, dataSave)
+
+  commit('updateEntries', {...entry})
 } 
 
 export const createEntry = async ( /*{ commit }*/ ) => {
