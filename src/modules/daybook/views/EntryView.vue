@@ -1,4 +1,5 @@
-<template>
+<template >
+  <template v-if="entry">
   <div class="entry-title d-flex justify-content-between pt-3 px-3">
     <div>
       <span class="text-success fs-3 fw-bold">{{ day }}</span>
@@ -24,11 +25,15 @@
    <textarea v-model="entry.text" placeholder="Que sucedio hoy?"></textarea>
   </div>
 
+
+  <img src="https://pbs.twimg.com/profile_images/1579811683521937409/Q5iYpexb_400x400.jpg" alt="entry-img">
+  </template>
+
+
   <Fab
     icon="fa-save"
   />
 
-  <img src="https://pbs.twimg.com/profile_images/1579811683521937409/Q5iYpexb_400x400.jpg" alt="entry-img">
 
 </template>
 
@@ -81,9 +86,14 @@ import { mapGetters } from 'vuex'
       }
     },
     created(){
-      //console.log(this.entry)
+      console.log(this.entry)
       this.loadEntry()
     },
+    watch: {
+      id(){
+        this.loadEntry()
+      }
+    }
    
 
   }
