@@ -15,12 +15,19 @@
 
 <script>
 import { defineAsyncComponent } from 'vue'
+import { mapActions } from 'vuex'
 
 export default{
   name: 'DaybookLayouts',
   components: {
     Navbar: defineAsyncComponent(() => import('../components/Navbar')),
     EntryList: defineAsyncComponent(() => import('../components/EntryList'))
+  },
+  methods:{
+   ...mapActions('journal',['loadingEntries'])
+  },
+  created(){
+    this.loadingEntries()
   }
 }
 </script>

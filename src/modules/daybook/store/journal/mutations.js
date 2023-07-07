@@ -3,8 +3,9 @@
 
 } */
 
-export const setEntries = ( /*state*/ ) => {
-
+export const setEntries = ( state,entries ) => {
+  state.entries = [...entries, ...state.entries]
+  state.isLoading = false
 }
 export const updateEntries = ( /*state*/ ) => {
 
