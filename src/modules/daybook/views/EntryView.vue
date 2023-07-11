@@ -79,10 +79,19 @@ import { mapActions, mapGetters } from 'vuex'
 
     },
     methods: {
-      ...mapActions('journal', ['updateEntry']),
+      ...mapActions('journal', ['updateEntry','createEntry']),
       loadEntry(){
-        const entry = this.getEntryById(this.id)
-        if(Object.keys(entry).length === 0) return this.$router.push({name: 'no-entry'})
+        let entry;
+        if(this.id === 'new'){
+          entry = {
+            text: '',
+            date: new Date().getTime(),
+          }
+        }else{
+          entry = this.getEntryById(this.id)
+          if(Object.keys(entry).length === 0) return this.$router.push({name: 'no-entry'})
+        }
+        
         // if(!entry) // no funciono
         this.entry = entry;
       },
@@ -90,7 +99,17 @@ import { mapActions, mapGetters } from 'vuex'
       async saveEntry(){
         //console.log('Guardando entrada')
         //console.log(this.entry)
-        this.updateEntry(this.entry)
+
+
+        if(this.entry.id){
+          //update the entry
+          await this.updateEntry(this.entry)
+        }else{
+          //create a new entry
+          const id = await this.createEntry(this.entry);
+
+          this.$router.push({name: 'entry', params: {id}})
+        }
       }
     },
     created(){
